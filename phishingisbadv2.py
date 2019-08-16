@@ -132,6 +132,9 @@ for i in list(range(1000000)):
 	# Generate a random password value
 	pwd = ''.join([random.choice(string.ascii_letters + string.digits) for n in xrange(random.randrange(6,32))])
 	# Create and submit the request
-	r = requests.post('https://tru[REDACTED].com/a/post.php', data = {'email':eml,'pass':pwd}, allow_redirects=False, headers=hdr)
+        try:
+            r = requests.post('https://[redacted]/page.php)
+        except requests.exceptions.RequestException:
+            print("Exception handled, continuing...")
 	# Output the combination and result HTTP code (optional)
 	print("Submission count: " + str(i) + " - " + eml + " / " + pwd + " - " + str(r))
