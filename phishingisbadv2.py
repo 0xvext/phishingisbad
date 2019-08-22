@@ -128,13 +128,14 @@ for i in list(range(1000000)):
 		'User-Agent': "'" + headers[random.randrange(0,84)] + "'",
 	}
 	# Generate a random string@domain.tld combination
-	eml = ''.join([random.choice(string.ascii_letters + string.digits) for n in xrange(random.randrange(3,10))]) + '@' + domains[random.randrange(0,10)] + '.' + tlds[random.randrange(0,8)]
+	eml = ''.join([random.choice(string.ascii_letters + string.digits) for n in range(random.randrange(3,10))]) + '@' + domains[random.randrange(0,len(domains)-1)] + '.' + tlds[random.randrange(0,len(tlds)-1)]
 	# Generate a random password value
-	pwd = ''.join([random.choice(string.ascii_letters + string.digits) for n in xrange(random.randrange(6,32))])
+	pwd = ''.join([random.choice(string.ascii_letters + string.digits) for n in range(random.randrange(6,32))])
 	# Create and submit the request
-        try:
-            r = requests.post('https://[redacted]/page.php)
-        except requests.exceptions.RequestException:
-            print("Exception handled, continuing...")
+	try:
+		r = requests.post('https://[redacted]/page.php', data = {'email':eml,'pass':pwd}, allow_redirects=False, headers=hdr))
+	except requests.exceptions.RequestException:
+		print("Exception handled, continuing...")
+		continue
 	# Output the combination and result HTTP code (optional)
 	print("Submission count: " + str(i) + " - " + eml + " / " + pwd + " - " + str(r))
